@@ -2,7 +2,6 @@ package com.example.swagger2withspringboot.models;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
 
 @ApiModel(description = "Details about the post")
 public class Post {

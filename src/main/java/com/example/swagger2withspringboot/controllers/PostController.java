@@ -1,6 +1,7 @@
 package com.example.swagger2withspringboot.controllers;
 
 import com.example.swagger2withspringboot.models.Post;
+import com.example.swagger2withspringboot.models.ResponseVO;
 import com.example.swagger2withspringboot.services.PostService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,31 @@ public class PostController {
     private PostService postService;
 
     @GetMapping
-    @ApiOperation(value = "Get all posts", response = List.class)
-    public List<Post> getPosts() {
-        return postService.getAllPosts();
+    public ResponseVO<List> getAllPosts() {
+        ResponseVO<List> response = new ResponseVO<>();
+        response.setData(postService.getAllPosts());
+        response.setMessage("Get all posts");
+        response.setStatus(true);
+
+        System.out.println(response);
+        return response;
     }
 
-    @GetMapping("/{id}")
-    @ApiOperation(value = "Get post by post id", response = Post.class)
-    public Post getPostById(@PathVariable int id) {
-        return postService.getPostById(id);
-    }
-
-    @PostMapping()
-    @ApiOperation(value = "Create new post", response = Post.class)
-    public Post createNewPost(@RequestBody Post newPost) {
-        return postService.createPost(newPost);
-    }
+//    @GetMapping
+//    @ApiOperation(value = "Get all posts", response = List.class)
+//    public List<Post> getPosts() {
+//        return postService.getAllPosts();
+//    }
+//
+//    @GetMapping("/{id}")
+//    @ApiOperation(value = "Get post by post id", response = Post.class)
+//    public Post getPostById(@PathVariable int id) {
+//        return postService.getPostById(id);
+//    }
+//
+//    @PostMapping()
+//    @ApiOperation(value = "Create new post", response = Post.class)
+//    public Post createNewPost(@RequestBody Post newPost) {
+//        return postService.createPost(newPost);
+//    }
 }
